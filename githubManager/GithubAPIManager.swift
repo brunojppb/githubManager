@@ -6,13 +6,22 @@
 //  Copyright © 2016 brunojppb. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import Alamofire
 import SwiftyJSON
 
 class GithubAPIManager {
     
     static let sharedInstance = GithubAPIManager()
+    var alamofireManager: Alamofire.Manager
+    
+    let clientID: String = "1234567890"
+    let clientSecret: String = "abasdaslkdajd"
+    
+    init() {
+        let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
+        alamofireManager = Alamofire.Manager(configuration: configuration)
+    }
     
     func getPublicGists(completionHandler: (Result<[Gist], NSError>) -> Void ) {
         Alamofire.request(GistRouter.GetPublic())
@@ -21,12 +30,15 @@ class GithubAPIManager {
         }
     }
     
-    func printPublicGists() {
-        Alamofire.request(GistRouter.GetPublic())
-            .responseString { response in
-                if let receivedString = response.result.value {
-                    print(receivedString)
+    func imageFromURLString(imageURLString: String, completionHandler: (UIImage?, NSError?) -> Void) {
+        alamofireManager.request(.GET, imageURLString)
+            .response { (request, response, data, error) in
+                if data == nil {
+                    completionHandler(nil, nil)
+                    return
                 }
+                let image = UIImage(data: data! as NSData)
+                completionHandler(image, nil)
         }
     }
 }

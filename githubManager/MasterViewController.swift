@@ -89,7 +89,19 @@ class MasterViewController: UITableViewController {
         let gist = gists[indexPath.row]
         cell.textLabel?.text = gist.description
         cell.detailTextLabel?.text = gist.ownerLogin
-        // TODO: Set ownner image in cell.imageView
+        if let imageURL = gist.ownerAvatarURL {
+            GithubAPIManager.sharedInstance.imageFromURLString(imageURL, completionHandler: { (image, error) in
+                if let error = error {
+                    print(error)
+                }
+                if let cellToUpdate = self.tableView.cellForRowAtIndexPath(indexPath) {
+                    cellToUpdate.imageView?.image = image
+                    cellToUpdate.setNeedsLayout()
+                }
+            })
+        } else {
+            cell.imageView?.image = nil
+        }
         return cell
     }
 
