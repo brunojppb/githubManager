@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		15A900A71D4417C60090B513 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15A900A51D4417C60090B513 /* Alamofire.framework */; };
 		15A900A81D4417C60090B513 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15A900A61D4417C60090B513 /* SwiftyJSON.framework */; };
+		15A900AB1D441A030090B513 /* GithubAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A900AA1D441A030090B513 /* GithubAPIManager.swift */; };
+		15A900AF1D441AC90090B513 /* GistRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A900AE1D441AC90090B513 /* GistRouter.swift */; };
+		15A900B21D441E750090B513 /* Gist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A900B11D441E750090B513 /* Gist.swift */; };
+		15A900B41D456C0E0090B513 /* ResponseJSONObjectSerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A900B31D456C0E0090B513 /* ResponseJSONObjectSerializable.swift */; };
+		15A900B71D456C900090B513 /* AlamofireRequest+JSONSerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A900B61D456C900090B513 /* AlamofireRequest+JSONSerializable.swift */; };
 		15CD5E1E1D4416C300F9A53A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD5E1D1D4416C300F9A53A /* AppDelegate.swift */; };
 		15CD5E201D4416C300F9A53A /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD5E1F1D4416C300F9A53A /* MasterViewController.swift */; };
 		15CD5E221D4416C300F9A53A /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15CD5E211D4416C300F9A53A /* DetailViewController.swift */; };
@@ -20,6 +25,11 @@
 /* Begin PBXFileReference section */
 		15A900A51D4417C60090B513 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		15A900A61D4417C60090B513 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
+		15A900AA1D441A030090B513 /* GithubAPIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GithubAPIManager.swift; sourceTree = "<group>"; };
+		15A900AE1D441AC90090B513 /* GistRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GistRouter.swift; sourceTree = "<group>"; };
+		15A900B11D441E750090B513 /* Gist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gist.swift; sourceTree = "<group>"; };
+		15A900B31D456C0E0090B513 /* ResponseJSONObjectSerializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseJSONObjectSerializable.swift; sourceTree = "<group>"; };
+		15A900B61D456C900090B513 /* AlamofireRequest+JSONSerializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AlamofireRequest+JSONSerializable.swift"; sourceTree = "<group>"; };
 		15CD5E1A1D4416C300F9A53A /* githubManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = githubManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		15CD5E1D1D4416C300F9A53A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		15CD5E1F1D4416C300F9A53A /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
@@ -43,6 +53,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		15A900AC1D441AA90090B513 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				15A900AD1D441AB00090B513 /* API */,
+			);
+			name = Services;
+			sourceTree = "<group>";
+		};
+		15A900AD1D441AB00090B513 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				15A900AA1D441A030090B513 /* GithubAPIManager.swift */,
+				15A900AE1D441AC90090B513 /* GistRouter.swift */,
+			);
+			name = API;
+			sourceTree = "<group>";
+		};
+		15A900B01D441E6B0090B513 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				15A900B11D441E750090B513 /* Gist.swift */,
+				15A900B31D456C0E0090B513 /* ResponseJSONObjectSerializable.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		15A900B51D456C760090B513 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				15A900B61D456C900090B513 /* AlamofireRequest+JSONSerializable.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
 		15CD5E111D4416C300F9A53A = {
 			isa = PBXGroup;
 			children = (
@@ -64,6 +108,9 @@
 		15CD5E1C1D4416C300F9A53A /* githubManager */ = {
 			isa = PBXGroup;
 			children = (
+				15A900B51D456C760090B513 /* Extensions */,
+				15A900B01D441E6B0090B513 /* Models */,
+				15A900AC1D441AA90090B513 /* Services */,
 				15CD5E1D1D4416C300F9A53A /* AppDelegate.swift */,
 				15CD5E1F1D4416C300F9A53A /* MasterViewController.swift */,
 				15CD5E211D4416C300F9A53A /* DetailViewController.swift */,
@@ -166,8 +213,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				15CD5E221D4416C300F9A53A /* DetailViewController.swift in Sources */,
+				15A900AB1D441A030090B513 /* GithubAPIManager.swift in Sources */,
+				15A900B41D456C0E0090B513 /* ResponseJSONObjectSerializable.swift in Sources */,
+				15A900B21D441E750090B513 /* Gist.swift in Sources */,
 				15CD5E201D4416C300F9A53A /* MasterViewController.swift in Sources */,
+				15A900AF1D441AC90090B513 /* GistRouter.swift in Sources */,
 				15CD5E1E1D4416C300F9A53A /* AppDelegate.swift in Sources */,
+				15A900B71D456C900090B513 /* AlamofireRequest+JSONSerializable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
