@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import Kingfisher
 
 class MasterViewController: UITableViewController {
 
     var detailViewController: DetailViewController? = nil
     var gists = [Gist]()
+        
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
@@ -89,18 +91,11 @@ class MasterViewController: UITableViewController {
         let gist = gists[indexPath.row]
         cell.textLabel?.text = gist.description
         cell.detailTextLabel?.text = gist.ownerLogin
-        if let imageURL = gist.ownerAvatarURL {
-            GithubAPIManager.sharedInstance.imageFromURLString(imageURL, completionHandler: { (image, error) in
-                if let error = error {
-                    print(error)
-                }
-                if let cellToUpdate = self.tableView.cellForRowAtIndexPath(indexPath) {
-                    cellToUpdate.imageView?.image = image
-                    cellToUpdate.setNeedsLayout()
-                }
-            })
+        if let imageURL = gist.ownerAvatarURL,
+            url = NSURL(string: imageURL) {
+            cell.imageView?.kf_setImageWithURL(url, placeholderImage: UIImage(named: "placeholder"), optionsInfo: nil, progressBlock: nil, completionHandler: nil)
         } else {
-            cell.imageView?.image = nil
+            cell.imageView?.image = UIImage(named: "placeholder")
         }
         return cell
     }

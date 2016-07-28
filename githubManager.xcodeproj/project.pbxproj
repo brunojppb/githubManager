@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1526F7731D4A9506008BB18C /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1526F7721D4A9506008BB18C /* Kingfisher.framework */; };
 		15A900A71D4417C60090B513 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15A900A51D4417C60090B513 /* Alamofire.framework */; };
 		15A900A81D4417C60090B513 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15A900A61D4417C60090B513 /* SwiftyJSON.framework */; };
 		15A900AB1D441A030090B513 /* GithubAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A900AA1D441A030090B513 /* GithubAPIManager.swift */; };
@@ -23,6 +24,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1526F7701D4A9190008BB18C /* PINCache.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PINCache.framework; path = Carthage/Build/iOS/PINCache.framework; sourceTree = "<group>"; };
+		1526F7721D4A9506008BB18C /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
 		15A900A51D4417C60090B513 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		15A900A61D4417C60090B513 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
 		15A900AA1D441A030090B513 /* GithubAPIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GithubAPIManager.swift; sourceTree = "<group>"; };
@@ -47,6 +50,7 @@
 			files = (
 				15A900A71D4417C60090B513 /* Alamofire.framework in Frameworks */,
 				15A900A81D4417C60090B513 /* SwiftyJSON.framework in Frameworks */,
+				1526F7731D4A9506008BB18C /* Kingfisher.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,6 +94,8 @@
 		15CD5E111D4416C300F9A53A = {
 			isa = PBXGroup;
 			children = (
+				1526F7721D4A9506008BB18C /* Kingfisher.framework */,
+				1526F7701D4A9190008BB18C /* PINCache.framework */,
 				15A900A51D4417C60090B513 /* Alamofire.framework */,
 				15A900A61D4417C60090B513 /* SwiftyJSON.framework */,
 				15CD5E1C1D4416C300F9A53A /* githubManager */,
@@ -198,6 +204,7 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework",
 			);
 			outputPaths = (
 			);
