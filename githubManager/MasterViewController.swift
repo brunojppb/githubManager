@@ -37,8 +37,20 @@ class MasterViewController: UITableViewController {
     }
 
     override func viewWillAppear(animated: Bool) {
-        self.clearsSelectionOnViewWillAppear = self.splitViewController!.collapsed
         super.viewWillAppear(animated)
+        self.clearsSelectionOnViewWillAppear = self.splitViewController!.collapsed
+        
+        // setup refresh control
+        if self.refreshControl == nil {
+            self.refreshControl = UIRefreshControl()
+            self.refreshControl?.addTarget(self, action: #selector(self.refresh), forControlEvents: .ValueChanged)
+        }
+    }
+    
+    // MARK: pull to refresh gists
+    func refresh(sender: AnyObject) {
+        nextPageString = nil
+        self.loadGists(nextPageString)
     }
     
 
@@ -46,6 +58,10 @@ class MasterViewController: UITableViewController {
         self.isLoading = true
         GithubAPIManager.sharedInstance.getPublicGists(urlToLoad) { (result, nextPage) in
             self.isLoading = false
+            // hide refresh control if refreshing
+            if self.refreshControl != nil && (self.refreshControl?.refreshing)! {
+                self.refreshControl?.endRefreshing()
+            }
             self.nextPageString = nextPage
             guard result.error == nil else {
                 print(result.error)
