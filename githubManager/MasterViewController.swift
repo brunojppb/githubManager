@@ -13,11 +13,13 @@ class MasterViewController: UITableViewController {
 
     var detailViewController: DetailViewController? = nil
     var gists = [Gist]()
+    var nextPageString: String?
+    var isLoading = false
         
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        self.loadGists()
+        self.loadGists(nil)
     }
 
 
@@ -40,8 +42,11 @@ class MasterViewController: UITableViewController {
     }
     
 
-    func loadGists() {
-        GithubAPIManager.sharedInstance.getPublicGists { result in
+    func loadGists(urlToLoad: String?) {
+        self.isLoading = true
+        GithubAPIManager.sharedInstance.getPublicGists(urlToLoad) { (result, nextPage) in
+            self.isLoading = false
+            self.nextPageString = nextPage
             guard result.error == nil else {
                 print(result.error)
                 // TODO: Display Error
@@ -49,7 +54,11 @@ class MasterViewController: UITableViewController {
             }
             
             if let fetchedGists = result.value {
-                self.gists = fetchedGists
+                if self.nextPageString != nil {
+                    self.gists += fetchedGists
+                } else {
+                    self.gists = fetchedGists
+                }
             }
             self.tableView.reloadData()
         }
@@ -97,6 +106,17 @@ class MasterViewController: UITableViewController {
         } else {
             cell.imageView?.image = UIImage(named: "placeholder")
         }
+        
+        // check if we are at the end of the table
+        // and request more gists from the API
+        let rowsToLoadFromBottom = 5
+        let rowsLoaded = gists.count
+        if let nextPage = self.nextPageString {
+            if(!isLoading && (indexPath.row >= (rowsLoaded - rowsToLoadFromBottom))) {
+                self.loadGists(nextPage)
+            }
+        }
+        
         return cell
     }
 
