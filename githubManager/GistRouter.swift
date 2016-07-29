@@ -15,6 +15,9 @@ enum GistRouter: URLRequestConvertible {
     case GetPublic()
     case GetAtPath(String)
     
+    // Routes that need authentication
+    case GetMyStarred()
+    
     var URLRequest: NSMutableURLRequest {
         
         var method: Alamofire.Method {
@@ -22,6 +25,8 @@ enum GistRouter: URLRequestConvertible {
             case .GetPublic:
                 return .GET
             case .GetAtPath:
+                return .GET
+            case .GetMyStarred:
                 return .GET
             }
         }
@@ -34,12 +39,22 @@ enum GistRouter: URLRequestConvertible {
                 let url = NSURL(string: path)
                 let relativePath = url!.relativePath!
                 return (relativePath, nil)
+            case GetMyStarred:
+                return ("/gists/starred", nil)
             }
             
         }()
         
         let URL = NSURL(string: GistRouter.baseURLString)!
         let URLRequest = NSMutableURLRequest(URL: URL.URLByAppendingPathComponent(result.path))
+        
+        let username = "username"
+        let password = "password"
+        
+        let credentialData = "\(username):\(password)".dataUsingEncoding(NSUTF8StringEncoding)!
+        let base64Credentials = credentialData.base64EncodedStringWithOptions([])
+        
+        URLRequest.setValue("Basic \(base64Credentials)", forHTTPHeaderField: "Authorization")
         
         let encoding = Alamofire.ParameterEncoding.JSON
         let (encodedRequest, _) = encoding.encode(URLRequest, parameters: result.parameters)

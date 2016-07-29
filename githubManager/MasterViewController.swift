@@ -21,6 +21,8 @@ class MasterViewController: UITableViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         self.loadGists(nil)
+        
+        GithubAPIManager.sharedInstance.printMyStarredGistWithBasicAuth()
     }
 
 

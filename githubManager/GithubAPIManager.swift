@@ -23,6 +23,16 @@ class GithubAPIManager {
         alamofireManager = Alamofire.Manager(configuration: configuration)
     }
     
+    // MARK: Basic Authentication
+    func printMyStarredGistWithBasicAuth() {
+        alamofireManager.request(GistRouter.GetMyStarred())
+            .responseString { response in
+                if let receivedString = response.result.value {
+                    print(receivedString)
+                }
+        }
+    }
+    
     func getGists(urlRequest: URLRequestConvertible, completionHandler: (Result<[Gist], NSError>, String?) -> Void) {
         alamofireManager.request(urlRequest)
             .validate()
