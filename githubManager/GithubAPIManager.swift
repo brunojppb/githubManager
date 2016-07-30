@@ -26,9 +26,21 @@ class GithubAPIManager {
     // MARK: Basic Authentication
     func printMyStarredGistWithBasicAuth() {
         alamofireManager.request(GistRouter.GetMyStarred())
+            .validate()
             .responseString { response in
                 if let receivedString = response.result.value {
                     print(receivedString)
+                    let json = SwiftyJSON.JSON(receivedString)
+                    if let message = json["message"].string {
+                        let error = Error.errorWithCode(.DataSerializationFailed, failureReason: message)
+                        // TODO: Bubble up message error
+                    }
+                    // TODO: Manipulate JSON
+                }
+                
+                if let error = response.result.error {
+                    print(error)
+                    // TODO: Buuble up request error
                 }
         }
     }
