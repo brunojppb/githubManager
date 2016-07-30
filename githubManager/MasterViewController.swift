@@ -8,24 +8,75 @@
 
 import UIKit
 import Kingfisher
+import SafariServices
 
-class MasterViewController: UITableViewController {
+class MasterViewController: UITableViewController, LoginViewDelegate, SFSafariViewControllerDelegate {
 
     var detailViewController: DetailViewController? = nil
     var gists = [Gist]()
     var nextPageString: String?
     var isLoading = false
     var dateFormatter = NSDateFormatter()
+    var safariViewController: SFSafariViewController?
+    var alreadyRequiredGithub = false
         
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        self.loadGists(nil)
+        let defaults = NSUserDefaults.standardUserDefaults()
+        if !defaults.boolForKey("loadingOAuthToken") {
+            self.loadInitialData()
+        }
+    }
+    
+    func loadInitialData() {
+
+        if !GithubAPIManager.sharedInstance.hasOAuthToken() {
+            showAuthLoginView()
+        } else {
+            GithubAPIManager.sharedInstance.printMyStarredGistsWithOAuth2()
+        }
+    }
+    
+    func showAuthLoginView() {
+        alreadyRequiredGithub = true
+        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        if let loginVC = storyboard.instantiateViewControllerWithIdentifier("LoginViewController") as? LoginViewController {
+            loginVC.delegate = self
+            self.presentViewController(loginVC, animated: true, completion: nil)
+        }
+    }
+    
+    func didTapLoginButton() {
         
-        GithubAPIManager.sharedInstance.printMyStarredGistWithBasicAuth()
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setBool(true, forKey: "loadingOAuthToken")
+        
+        self.dismissViewControllerAnimated(false, completion: nil)
+        
+        if let authURL = GithubAPIManager.sharedInstance.URLToStartOAuth2Login() {
+            safariViewController = SFSafariViewController(URL: authURL)
+            safariViewController?.delegate = self
+            if let webViewController = safariViewController {
+                self.presentViewController(webViewController, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    // MARK: Safari View Controller Delegate
+    func safariViewController(controller: SFSafariViewController, didCompleteInitialLoad didLoadSuccessfully: Bool) {
+        
+        // Detect if not being able to load the OAuth URL
+        if !didLoadSuccessfully {
+            // TODO: Handle this better
+            let defaults = NSUserDefaults.standardUserDefaults()
+            defaults.setBool(false, forKey: "loadingOAuthToken")
+            controller.dismissViewControllerAnimated(true, completion: nil)
+        }
     }
 
-
+    
+    // MARK: Life Cicle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.

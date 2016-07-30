@@ -48,13 +48,10 @@ enum GistRouter: URLRequestConvertible {
         let URL = NSURL(string: GistRouter.baseURLString)!
         let URLRequest = NSMutableURLRequest(URL: URL.URLByAppendingPathComponent(result.path))
         
-        let username = "username"
-        let password = "password"
-        
-        let credentialData = "\(username):\(password)".dataUsingEncoding(NSUTF8StringEncoding)!
-        let base64Credentials = credentialData.base64EncodedStringWithOptions([])
-        
-        URLRequest.setValue("Basic \(base64Credentials)", forHTTPHeaderField: "Authorization")
+        // SET OAuth token if we have one
+        if let token = GithubAPIManager.sharedInstance.OAuthToken {
+            URLRequest.setValue("token \(token)", forHTTPHeaderField: "Authorization")
+        }
         
         let encoding = Alamofire.ParameterEncoding.JSON
         let (encodedRequest, _) = encoding.encode(URLRequest, parameters: result.parameters)

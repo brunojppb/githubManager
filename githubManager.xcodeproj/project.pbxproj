@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		1526F7731D4A9506008BB18C /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1526F7721D4A9506008BB18C /* Kingfisher.framework */; };
+		157F89D91D4CF1BF000592D0 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157F89D81D4CF1BF000592D0 /* LoginViewController.swift */; };
+		157F89DB1D4CF897000592D0 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 157F89DA1D4CF897000592D0 /* SafariServices.framework */; };
 		15A900A71D4417C60090B513 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15A900A51D4417C60090B513 /* Alamofire.framework */; };
 		15A900A81D4417C60090B513 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15A900A61D4417C60090B513 /* SwiftyJSON.framework */; };
 		15A900AB1D441A030090B513 /* GithubAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A900AA1D441A030090B513 /* GithubAPIManager.swift */; };
@@ -26,6 +28,8 @@
 /* Begin PBXFileReference section */
 		1526F7701D4A9190008BB18C /* PINCache.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PINCache.framework; path = Carthage/Build/iOS/PINCache.framework; sourceTree = "<group>"; };
 		1526F7721D4A9506008BB18C /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
+		157F89D81D4CF1BF000592D0 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		157F89DA1D4CF897000592D0 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		15A900A51D4417C60090B513 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		15A900A61D4417C60090B513 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
 		15A900AA1D441A030090B513 /* GithubAPIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GithubAPIManager.swift; sourceTree = "<group>"; };
@@ -48,6 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				157F89DB1D4CF897000592D0 /* SafariServices.framework in Frameworks */,
 				15A900A71D4417C60090B513 /* Alamofire.framework in Frameworks */,
 				15A900A81D4417C60090B513 /* SwiftyJSON.framework in Frameworks */,
 				1526F7731D4A9506008BB18C /* Kingfisher.framework in Frameworks */,
@@ -94,6 +99,7 @@
 		15CD5E111D4416C300F9A53A = {
 			isa = PBXGroup;
 			children = (
+				157F89DA1D4CF897000592D0 /* SafariServices.framework */,
 				1526F7721D4A9506008BB18C /* Kingfisher.framework */,
 				1526F7701D4A9190008BB18C /* PINCache.framework */,
 				15A900A51D4417C60090B513 /* Alamofire.framework */,
@@ -120,6 +126,7 @@
 				15CD5E1D1D4416C300F9A53A /* AppDelegate.swift */,
 				15CD5E1F1D4416C300F9A53A /* MasterViewController.swift */,
 				15CD5E211D4416C300F9A53A /* DetailViewController.swift */,
+				157F89D81D4CF1BF000592D0 /* LoginViewController.swift */,
 				15CD5E231D4416C300F9A53A /* Main.storyboard */,
 				15CD5E261D4416C300F9A53A /* Assets.xcassets */,
 				15CD5E281D4416C300F9A53A /* LaunchScreen.storyboard */,
@@ -219,6 +226,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				157F89D91D4CF1BF000592D0 /* LoginViewController.swift in Sources */,
 				15CD5E221D4416C300F9A53A /* DetailViewController.swift in Sources */,
 				15A900AB1D441A030090B513 /* GithubAPIManager.swift in Sources */,
 				15A900B41D456C0E0090B513 /* ResponseJSONObjectSerializable.swift in Sources */,
